@@ -11,7 +11,7 @@ $(function () {
         })
     })
     $.ajax({
-        url:'https://api.jisuapi.com/news/channel?appkey=aeaaaaf1ab84e812',
+        url:'https://api.jisuapi.com/news/channel?appkey=a52cd4c401a49c1c',
         dataType:'JSONP',
         success:function (res) {
             let arr=res.result;
@@ -27,7 +27,7 @@ $(function () {
             $('#scroller ul' ).html(str);
             function render(type,start) {
                 $.ajax({
-                    url:'https://api.jisuapi.com/news/get?channel='+type+'&start='+start+'&num=3&appkey=aeaaaaf1ab84e812',
+                    url:'https://api.jisuapi.com/news/get?channel='+type+'&start='+start+'&num=3&appkey=a52cd4c401a49c1c',
                     dataType:'JSONP',
                     success:function (val) {
                         // console.log(val)
