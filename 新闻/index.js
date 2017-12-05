@@ -1,17 +1,19 @@
 $(function () {
-    var myScroll = new IScroll('#wrapper', {scrollX: true, scrollY: false, mouseWheel: true});
+    var myScroll = new IScroll('#wrapper', {scrollX: true, scrollY: false, mouseWheel: true,click:true});
     $(document).ready(function () {
         $(document).ajaxSend(function () {
             $('.load').css('display','block')
             console.log(1)
+            $('.zhao').show()
         })
         $(document).ajaxStop(function () {
             $('.load').css('display','none')
             console.log(2)
+            $('.zhao').hide()
         })
     })
     $.ajax({
-        url:'https://api.jisuapi.com/news/channel?appkey=a52cd4c401a49c1c',
+        url:'https://api.jisuapi.com/news/channel?appkey=aeaaaaf1ab84e812',
         dataType:'JSONP',
         success:function (res) {
             let arr=res.result;
@@ -71,7 +73,18 @@ $(function () {
                             $(val).children().css('display','none')
                             $(val).children().first().css({'white-space':'nowrap','height':'0.4rem','overflow':'hidden','text-overflow':'ellipsis','display':'block'})
                         })
+                        $('.content').on('click','.list',function (e) {
+                            e.preventDefault()
+                            var index=$('.list').index($(this))
+                            console.log(index)
+                            console.log(val.result.channel)
+                            localStorage.channel=val.result.channel
+                            localStorage.indexs=index
+                            location.href='xiangqing.html'
+
+                        })
                     }
+
                 })
             }
             //render结束
@@ -98,7 +111,7 @@ $(function () {
             //search开始
             function search(keyword){
                 $.ajax({
-                    url:'https://api.jisuapi.com/news/search?keyword='+keyword+'&appkey=aeaaaaf1ab84e812',
+                    url:'https://api.jisuapi.com/news/search?keyword='+keyword+'&appkey=a52cd4c401a49c1c',
                     dataType:'jsonp',
                     success:function (em) {
                         // console.log(em)
@@ -159,6 +172,10 @@ $(function () {
             })
 
         }
+    })
+
+    $('.search input').click(function () {
+        window.location.href='sousuo.html'
     })
 })
 
